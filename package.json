@@ -1,0 +1,29 @@
+{
+  "name": "join-cacheman",
+  "version": "1.0.0",
+  "description": "supper cacheman redis api, for ioredis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cjy37/join-cacheman.git"
+  },
+  "keywords": [
+    "redis",
+    "cacheman",
+    "redis",
+    "ioredis"
+  ],
+  "dependencies": {
+    "ioredis": "^3.2.1",
+    "q": "^1.5.1"
+  },
+  "author": "rocky chen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cjy37/join-cacheman/issues"
+  },
+  "homepage": "https://github.com/cjy37/join-cacheman#readme"
+}
