@@ -91,8 +91,14 @@ ret.prototype.del = function (keyPath, callback) {
     var _key = perKey + keyPath;
 
     global.joinRedis.keys(_key).then(function (result) {
-        var len = result.len;
+        var len = result.length;
         var i = 0;
+
+        if (len === 0) {
+            deferred.cb(null, null);
+            return;
+        }
+
         result.forEach(function (key) {
             global.joinRedis.del(key.replace(self.opt.keyPrefix, ''), function (err, result) {
                 console.log('delete key=' + key, result === 1);
