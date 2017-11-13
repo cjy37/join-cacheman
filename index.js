@@ -69,6 +69,8 @@ ret.prototype.set = function (key, value, ex, callback) {
             var unit = 1;
             if (ex.indexOf('d') > 0)
                 unit = 3600 * 24;
+            else if (ex.indexOf('h') > 0)
+                unit = 3600;
             else if (ex.indexOf('m') > 0)
                 unit = 60;
             ex = parseInt(ex) * unit;
