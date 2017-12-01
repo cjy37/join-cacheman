@@ -4,28 +4,37 @@ var Q = require('q');
 function ret(opt) {
 
     opt = opt || { keyPrefix: "devcache:" };
+    
+    this.cluster = false;
+    this.clusterNodes = [];
+    this.opt = opt
 
+    // 兼容cacheman配置转换：
     if (opt.hasOwnProperty('connect_timeout')) {
 
         opt.connectTimeout = opt.connect_timeout;
         opt.db = opt.database;
         opt.keyPrefix = opt.prefix+':';
     
+        // 支持集群模式配置：
+        if (opt.cluster) {
+            this.cluster = opt.cluster;
+            this.clusterNodes = opt.clusterNodes;
+        }
+        
+        delete opt.cluster;
+        delete opt.clusterNodes;
         delete opt.connect_timeout;
         delete opt.database;
         delete opt.engine;
         delete opt.prefix;
         delete opt.retry_strategy;
-        //this.baseOpt = opt;
     }
     
-    this.opt = opt
-
     if (!global.joinRedis) {
-        if (!this.opt.cluster)
-            global.joinRedis = new Redis(this.opt);
-        else
-            global.joinRedis = new Redis.Cluster(this.opt);
+        global.joinRedis = this.cluster ?
+            new Redis.Cluster(this.clusterNodes, { scaleReads: 'all', redisOptions: this.opt }) :
+            new Redis(this.opt);
     } else {
         console.log('has redis');
     }
