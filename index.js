@@ -98,7 +98,7 @@ ret.prototype.set = function (key, value, ex, callback) {
 ret.prototype.del = function (keyPath, callback) {
     var deferred = genericPromiseCallback(callback);
     var self = this;
-    var perKey = self.opt.keyPrefix + self.opt.subPrefixKey + ':';
+    var perKey = self.opt.keyPrefix + (self.opt.subPrefixKey ? self.opt.subPrefixKey + ':' : '');
     var _key = perKey + keyPath;
 
     global.joinRedis.keys(_key).then(function (result) {
