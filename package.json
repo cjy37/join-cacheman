@@ -1,6 +1,6 @@
 {
   "name": "join-cacheman",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "supper cacheman redis api, for ioredis",
   "main": "index.js",
   "scripts": {
