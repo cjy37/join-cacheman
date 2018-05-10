@@ -35,9 +35,8 @@ function ret(opt) {
         global.joinRedis = this.cluster ?
             new Redis.Cluster(this.clusterNodes, { scaleReads: 'all', redisOptions: this.opt }) :
             new Redis(this.opt);
-    } else {
-        console.log('has redis');
     }
+    
     return this;
 };
 
